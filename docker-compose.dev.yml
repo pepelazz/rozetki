@@ -1,0 +1,25 @@
+version: '2'
+services:
+  app:
+    build: .
+    networks:
+      - nla_db_net
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:12
+#    command: ["postgres", "-c", "log_statement=all", "-c", "log_destination=stderr"]
+    volumes:
+      - postgres_data_CompanyName_12:/var/lib/postgresql/data
+    ports:
+      - "5438:5432"
+    environment:
+      POSTGRES_PASSWORD: xvzDV4curLidx8IWZJ6czDHQ1qa7wjfL
+
+volumes:
+  postgres_data_CompanyName_12:
+
+networks:
+  nla_db_net:
+    driver: bridge

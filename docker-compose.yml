@@ -1,0 +1,35 @@
+version: '2'
+services:
+  bot:
+    build: .
+    cpu_shares: 73
+    networks:
+      - nla_db_net
+    volumes:
+      - /home/deploy/projectName/src/config.toml:/config.toml
+      - /home/deploy/projectName/image:/image
+    ports:
+      - "3101:3101"
+    logging:
+      driver: gelf
+      options:
+        gelf-address: "udp://85.143.214.161:12201"
+        tag: docker.app.nla_db
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:12
+    networks:
+      - nla_db_net
+    volumes:
+      - /home/deploy/projectName/postgres/volume:/var/lib/postgresql/data
+      - /home/deploy/projectName/postgres/logs:/logs
+    ports:
+      - "5657:5432"
+    environment:
+      POSTGRES_PASSWORD: xvzDV4curLidx8IWZJ6czDHQ1qa7wjfL
+
+networks:
+  nla_db_net:
+    driver: bridge
