@@ -12,7 +12,7 @@ templateDir = ["./sql/template"]
 [webServer]
 enable = true
 port = 3101
-url = "https://example.ru"
+url = "http://localhost:3101"
 
 [graylog]
 host = "85.143.214.161"

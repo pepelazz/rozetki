@@ -1,8 +1,8 @@
 export default {
   appName: 'CompanyName',
   uiAppName: 'CompanyName',
-  apiUrl: () => process.env.NODE_ENV === 'development' ? 'http://localhost:3101' : 'https://example.ru',
-  wsUrl: () => process.env.NODE_ENV === 'development' ? 'ws://localhost:3101' : 'wss://example.ru',
+  apiUrl: () => process.env.NODE_ENV === 'development' ? 'http://localhost:3101' : 'http://localhost:3101',
+  wsUrl: () => process.env.NODE_ENV === 'development' ? 'ws://localhost:3101' : 'wss://http://localhost:3101',
   isEmailAuth: {
     firstName: true,
     lastName: true,

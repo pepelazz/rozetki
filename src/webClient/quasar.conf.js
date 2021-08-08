@@ -52,7 +52,7 @@ module.exports = configure(function (ctx) {
         build: {
             vueRouterMode: 'history', // available values: 'hash', 'history'
             scopeHoisting: true,
-            vueRouterBase: '/',
+            vueRouterBase: '/admin',
             vueCompiler: true,
             publicPath: 'static/',
             distDir: 'dist',
