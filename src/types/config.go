@@ -4,6 +4,7 @@ import (
 	"github.com/pelletier/go-toml"
 	"os"
 	"strconv"
+	"fmt"
 )
 
 type Config struct {
@@ -23,6 +24,8 @@ func ReadConfigFile(path string) (c *Config, err error) {
 
 	tree, err := toml.LoadFile(path)
 	if err != nil {
+		pwd, _ := os.Getwd()
+		fmt.Printf("current directory (pwd): %s\n", pwd)
 		return nil, err
 	}
 

@@ -47,6 +47,14 @@ func StartWebServer(config types.Config) {
 	// роуты для сайта
 	siteRoutes(r)
 
+	// редирект для авторизации
+	r.GET("/check_user_email", func(c *gin.Context) {
+		c.Redirect(http.StatusTemporaryRedirect, fmt.Sprintf("/admin/check_user_email?t=%s", c.Query("t")))
+	})
+	r.GET("/email_auth_recover_password", func(c *gin.Context) {
+		c.Redirect(http.StatusTemporaryRedirect, fmt.Sprintf("/admin/email_auth_recover_password?t=%s", c.Query("t")))
+	})
+
 	// АВТОРИЗАЦИЯ
 	authRoute := r.Group("/auth")
 	{

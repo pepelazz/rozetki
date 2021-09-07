@@ -30,9 +30,9 @@ triggers = [
 
 
 methods = [
+	"legal_entity_list",
 	"legal_entity_update",
 	"legal_entity_get_by_id",
-	"legal_entity_list",
 	"legal_entity_trigger_before",
 	"legal_entity_trigger_after"
 ]
