@@ -2,8 +2,8 @@ package auth
 
 import (
 	"encoding/json"
-	"github.com/pepelazz/projectBlueprintSite/src/pg"
-	"github.com/pepelazz/projectBlueprintSite/src/types"
+	"github.com/pepelazz/rozetki/src/pg"
+	"github.com/pepelazz/rozetki/src/types"
 )
 
 var (

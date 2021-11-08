@@ -4,10 +4,10 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/lib/pq"
-	"github.com/pepelazz/projectBlueprintSite/src/cacheUtil"
-	"github.com/pepelazz/projectBlueprintSite/src/types"
-	"github.com/pepelazz/projectBlueprintSite/src/utils"
-	"github.com/pepelazz/projectBlueprintSite/src/sse"
+	"github.com/pepelazz/rozetki/src/cacheUtil"
+	"github.com/pepelazz/rozetki/src/sse"
+	"github.com/pepelazz/rozetki/src/types"
+	"github.com/pepelazz/rozetki/src/utils"
 	"github.com/tidwall/gjson"
 	"strconv"
 	"time"
@@ -84,7 +84,7 @@ func processPgEvent(event string) {
 			cacheUtil.UserRemoveByToken(token)
 		}
 	case "message":
-		if (gjson.Get(event, "flds.tg_op").Str == "INSERT") {
+		if gjson.Get(event, "flds.tg_op").Str == "INSERT" {
 			userIdInt := gjson.Get(event, "flds.user_id").Int()
 			sse.SendJson(strconv.FormatInt(userIdInt, 10), gjson.Get(event, "flds").Value())
 		}

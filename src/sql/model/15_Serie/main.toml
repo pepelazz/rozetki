@@ -1,0 +1,51 @@
+docType = "Serie"
+tableComment = "serie"
+
+tableName ="serie"
+
+fields = [
+	{name="id",			type="serial"},
+	{name="title",					type="text", 	ext="not null",	 comment="название"},
+	{name="brand_id",					type="int",	 comment="brand"},
+	{name="slug",					type="text",	 comment="slug"},
+	{name="published",					type="bool", 	ext=" default false",	 comment="published"},
+	{name="description",					type="text",	 comment="description"},
+	{name="old_id",					type="char",	size=100,	 comment="old_id"},
+	{name="search_text",			type="text",	comment="колонка для поиска"},
+	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
+	{name="created_at",				type="timestamp",	ext="with time zone"},
+	{name="updated_at",				type="timestamp",	ext="with time zone"},
+	{name="deleted",				type="bool",	ext="not null default false"}
+]
+
+fkConstraints = [
+	{name="serie_title_already_exist", ext="UNIQUE (title)"},
+	{fld="brand_id", ref="brand", fk="id"},
+	{name="serie_old_id_already_exist", ext="UNIQUE (old_id)"}
+]
+
+triggers = [
+	{name="serie_created", when="before insert or update", ref="for each row", funcName="builtin_fld_update"},
+	{name="serie_trigger_before", when="before insert or update", ref="for each row", funcName="serie_trigger_before"},
+	{name="serie_trigger_after", when="after insert or update", ref="for each row", funcName="serie_trigger_after"}
+]
+
+
+
+methods = [
+	"serie_list",
+	"serie_update",
+	"serie_get_by_id",
+	"serie_trigger_before",
+	"serie_trigger_after"
+]
+
+alterScripts = [
+	"alter table serie add column if not exists title text;",
+	"alter table serie add column if not exists brand_id int;",
+	"alter table serie add column if not exists slug text;",
+	"alter table serie add column if not exists published bool;",
+	"alter table serie add column if not exists description text;",
+	"alter table serie add column if not exists old_id CHARACTER VARYING(100);",
+	"alter table serie add column if not exists search_text text;"
+]

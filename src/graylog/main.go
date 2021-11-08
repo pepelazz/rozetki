@@ -1,9 +1,9 @@
 package graylog
 
 import (
-	"github.com/pepelazz/projectBlueprintSite/src/types"
-	"gopkg.in/aphistic/golf.v0"
 	"fmt"
+	"github.com/pepelazz/rozetki/src/types"
+	"gopkg.in/aphistic/golf.v0"
 )
 
 var (
@@ -23,7 +23,7 @@ func Init(config types.GraylogConfig) (err error) {
 	return
 }
 
-func (g *GraylogType) L() (*golf.Logger) {
+func (g *GraylogType) L() *golf.Logger {
 	l, _ := g.Client.NewLogger()
 	l.SetAttr("app", "fourPl")
 	return l

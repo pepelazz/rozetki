@@ -1,0 +1,48 @@
+docType = "Brand"
+tableComment = "brand"
+
+tableName ="brand"
+
+fields = [
+	{name="id",			type="serial"},
+	{name="title",					type="text", 	ext="not null",	 comment="название"},
+	{name="slug",					type="text",	 comment="slug"},
+	{name="published",					type="bool", 	ext=" default false",	 comment="published"},
+	{name="description",					type="text",	 comment="description"},
+	{name="old_id",					type="char",	size=100,	 comment="old_id"},
+	{name="search_text",			type="text",	comment="колонка для поиска"},
+	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
+	{name="created_at",				type="timestamp",	ext="with time zone"},
+	{name="updated_at",				type="timestamp",	ext="with time zone"},
+	{name="deleted",				type="bool",	ext="not null default false"}
+]
+
+fkConstraints = [
+	{name="brand_title_already_exist", ext="UNIQUE (title)"},
+	{name="brand_old_id_already_exist", ext="UNIQUE (old_id)"}
+]
+
+triggers = [
+	{name="brand_created", when="before insert or update", ref="for each row", funcName="builtin_fld_update"},
+	{name="brand_trigger_before", when="before insert or update", ref="for each row", funcName="brand_trigger_before"},
+	{name="brand_trigger_after", when="after insert or update", ref="for each row", funcName="brand_trigger_after"}
+]
+
+
+
+methods = [
+	"brand_list",
+	"brand_update",
+	"brand_get_by_id",
+	"brand_trigger_before",
+	"brand_trigger_after"
+]
+
+alterScripts = [
+	"alter table brand add column if not exists title text;",
+	"alter table brand add column if not exists slug text;",
+	"alter table brand add column if not exists published bool;",
+	"alter table brand add column if not exists description text;",
+	"alter table brand add column if not exists old_id CHARACTER VARYING(100);",
+	"alter table brand add column if not exists search_text text;"
+]

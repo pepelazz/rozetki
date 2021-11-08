@@ -142,7 +142,34 @@ const formatPgDate = (d) => {
   return d ? moment(d, 'YYYY-MM-DDTHH:mm:ss').format('DD-MM-YYYY') : null
 }
 
+const formatNumber = (v) => new Intl.NumberFormat('ru-RU', {maximumFractionDigits: 2}).format(v)
 
+const notifySuccess = (msg) => {
+  Notify.create({
+    color: 'positive',
+    position: 'bottom-right',
+    message: msg
+  })
+}
+
+const notifyError = (msg) => {
+  Notify.create({
+    color: 'negative',
+    position: 'top-right',
+    message: msg
+  })
+}
+
+
+const i18n_product_currency = (v) => {
+	const d = {
+		rub: 'RUB',
+		eur: 'EUR',
+		usd: 'USD'
+	}
+	return Array.isArray(v) ? v.map(v1 => d[v1]) : d[v]
+}
+				
 
 export default {
   postApiRequest,
@@ -154,8 +181,12 @@ export default {
   updateUrlQuery,
   formatPgDateTime,
   formatPgDate,
+  formatNumber,
+  notifySuccess,
+  notifyError,
   _,
-  
+  i18n_product_currency,
+	
 }
 
 const getHttpHeaders = () => {

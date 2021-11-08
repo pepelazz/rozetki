@@ -1,0 +1,44 @@
+docType = "ProductType"
+tableComment = "product type"
+
+tableName ="product_type"
+
+fields = [
+	{name="id",			type="serial"},
+	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
+	{name="slug",					type="char",	size=100,	 comment="slug"},
+	{name="old_id",					type="char",	size=100,	 comment="old_id"},
+	{name="search_text",			type="text",	comment="колонка для поиска"},
+	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
+	{name="created_at",				type="timestamp",	ext="with time zone"},
+	{name="updated_at",				type="timestamp",	ext="with time zone"},
+	{name="deleted",				type="bool",	ext="not null default false"}
+]
+
+fkConstraints = [
+	{name="product_type_title_already_exist", ext="UNIQUE (title)"},
+	{name="product_type_old_id_already_exist", ext="UNIQUE (old_id)"}
+]
+
+triggers = [
+	{name="product_type_created", when="before insert or update", ref="for each row", funcName="builtin_fld_update"},
+	{name="product_type_trigger_before", when="before insert or update", ref="for each row", funcName="product_type_trigger_before"},
+	{name="product_type_trigger_after", when="after insert or update", ref="for each row", funcName="product_type_trigger_after"}
+]
+
+
+
+methods = [
+	"product_type_list",
+	"product_type_update",
+	"product_type_get_by_id",
+	"product_type_trigger_before",
+	"product_type_trigger_after"
+]
+
+alterScripts = [
+	"alter table product_type add column if not exists title CHARACTER VARYING(150);",
+	"alter table product_type add column if not exists slug CHARACTER VARYING(100);",
+	"alter table product_type add column if not exists old_id CHARACTER VARYING(100);",
+	"alter table product_type add column if not exists search_text text;"
+]

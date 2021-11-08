@@ -2,18 +2,18 @@ package utils
 
 import (
 	"bytes"
+	"crypto/rand"
 	"encoding/gob"
+	"encoding/json"
+	"errors"
+	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/pepelazz/projectBlueprintSite/src/types"
+	"github.com/pepelazz/rozetki/src/types"
 	"io/ioutil"
+	"log"
 	"mime/multipart"
 	"net/http"
-	"fmt"
 	"strconv"
-	"encoding/json"
-	"crypto/rand"
-	"errors"
-	"log"
 	"strings"
 )
 
@@ -240,7 +240,7 @@ func ReadUploadedFile(c *gin.Context, exts []string) (file multipart.File, filen
 		fileKey = key
 		// извлекаем название файла из headers формы
 		for _, h := range headers {
-			if h != nil && len(h.Filename) > 0{
+			if h != nil && len(h.Filename) > 0 {
 				fileName = h.Filename
 			}
 		}
@@ -257,7 +257,7 @@ func ReadUploadedFile(c *gin.Context, exts []string) (file multipart.File, filen
 	if len(fileExt) == 0 {
 		return nil, fileName, errors.New("wrong file extansion")
 	}
-	if exts != nil && len(exts) > 0{
+	if exts != nil && len(exts) > 0 {
 		isExtTrue := false
 		for _, v := range exts {
 			if fileExt == v {

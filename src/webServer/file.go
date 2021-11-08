@@ -5,8 +5,8 @@ import (
 	"errors"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/pepelazz/projectBlueprintSite/src/pg"
-	"github.com/pepelazz/projectBlueprintSite/src/utils"
+	"github.com/pepelazz/rozetki/src/pg"
+	"github.com/pepelazz/rozetki/src/utils"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -114,7 +114,7 @@ func uploadFile(c *gin.Context) {
 	utils.HttpSuccess(c, map[string]string{"filename": fileName, "ext": fileExt, "url": fmt.Sprintf("/api/file/%s", fileUpdateRes.Token)})
 }
 
-func downloadFile(c *gin.Context)  {
+func downloadFile(c *gin.Context) {
 	// извлекаем токен файла из параметро запроса
 	fileToken := c.Param("fileToken")
 	if len(fileToken) == 0 {
@@ -135,7 +135,7 @@ func downloadFile(c *gin.Context)  {
 	c.File(path)
 }
 
-func deleteFile(c *gin.Context)  {
+func deleteFile(c *gin.Context) {
 	// извлекаем токен файла из параметро запроса
 	fileToken := c.Param("fileToken")
 	if len(fileToken) == 0 {
@@ -159,12 +159,12 @@ func deleteFile(c *gin.Context)  {
 func getFilePathByToken(userId interface{}, fileToken string) (string, error) {
 	jsonStr, _ := json.Marshal(map[string]interface{}{"user_id": userId, "token": fileToken})
 	res := struct {
-		Id int64 `json:"id"`
-		Filename string `json:"filename"`
+		Id        int64  `json:"id"`
+		Filename  string `json:"filename"`
 		TableName string `json:"table_name"`
-		TableId int64 `json:"table_id"`
+		TableId   int64  `json:"table_id"`
 	}{}
-	err := pg.CallPgFunc("file_get_by_token",jsonStr, &res, nil)
+	err := pg.CallPgFunc("file_get_by_token", jsonStr, &res, nil)
 	if err != nil {
 		return "", err
 	}

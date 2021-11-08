@@ -1,11 +1,11 @@
 package webServer
 
 import (
-	"github.com/gin-gonic/gin"
 	"fmt"
-	"github.com/pepelazz/projectBlueprintSite/src/graylog"
-	"github.com/pepelazz/projectBlueprintSite/src/types"
-	"github.com/pepelazz/projectBlueprintSite/src/utils"
+	"github.com/gin-gonic/gin"
+	"github.com/pepelazz/rozetki/src/graylog"
+	"github.com/pepelazz/rozetki/src/types"
+	"github.com/pepelazz/rozetki/src/utils"
 	"net/http"
 )
 

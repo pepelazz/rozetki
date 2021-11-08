@@ -8,15 +8,13 @@
         </template>
       </q-input>
       <div class="row wrap justify-center items-start content-start q-gutter-md" style="margin-left: 0">
-        <q-btn class="col" outline color="secondary" @click='$emit("cancel")'>отмена</q-btn>
+        <q-btn class="col" outline color="secondary" @click='$emit("cancel")'>{{$t('message.cancel')}}</q-btn>
         <q-btn class="col" color="primary" @click="login">ok</q-btn>
       </div>
     </div>
     <!--СООБЩЕНИЕ ПОСЛЕ ОТПРАВКИ ФОРМЫ РЕГИСТРАЦИИ -->
     <div v-if='isRegisterSuccess'>
-      <div style="padding: 0">Проверьте указанный в регистрации email.<br>Должно прийти письмо для
-        подтверждения почтового адреса.
-      </div>
+      <div style="padding: 0">{{$t('auth.register_message')}}</div>
     </div>
   </div>
 </template>
@@ -28,10 +26,10 @@
         regForm: {},
         flds: [
           {model: 'login', label: 'email', type: 'email', icon: 'email'},
-          {model: 'password', label: 'пароль', type: 'password', icon: 'lock'},
-          {model: 'passwordRepeat', label: 'повторите пароль', type: 'password', icon: 'lock'},
-          {model: 'last_name', label: 'фамилия', type: 'text', icon: 'person'},
-          {model: 'first_name', label: 'имя', type: 'text', icon: 'person_outline'},
+          {model: 'password', label: this.$t('auth.password'), type: 'password', icon: 'lock'},
+          {model: 'passwordRepeat', label: this.$t('auth.password_repeat'), type: 'password', icon: 'lock'},
+          {model: 'last_name', label:  this.$t('profile.last_name'), type: 'text', icon: 'person'},
+          {model: 'first_name', label: this.$t('profile.first_name'), type: 'text', icon: 'person_outline'},
         ],
         isRegisterSuccess: false,
       }
@@ -41,13 +39,13 @@
         // валидация полей формы регистрации
         // -- валидация email
         if (!validateEmail(this.regForm.login)) {
-          this.$q.notify({message: 'Поле "email" заполнено неверно', type: 'negative', position: 'top-right'})
+          this.$q.notify({message: this.$t('aith.invalid_email'), type: 'negative', position: 'top-right'})
           return
         }
         // -- валидация пароля
         if (!this.regForm.password || this.regForm.password.length < 7) {
           this.$q.notify({
-            message: 'Пароль должен быть больше 7 знаков',
+            message: this.$t('aith.invalid_password_must_be_more_7'),
             type: 'negative',
             position: 'top-right'
           })
@@ -55,7 +53,7 @@
         }
         if (this.regForm.password !== this.regForm.passwordRepeat) {
           this.$q.notify({
-            message: 'Повторно введенный пароль не совпадает с первым вариантом',
+            message: this.$t('auth.invalid_password_wrong_repeat'),
             type: 'negative',
             position: 'top-right'
           })
@@ -64,7 +62,7 @@
         // -- валидация имя (если поле указано в форме регистрации)
         if (!this.regForm.first_name) {
           this.$q.notify({
-            message: 'Необходимо заполнить поле "имя"',
+            message: this.$t('auth.invalid_first_name'),
             type: 'negative',
             position: 'top-right'
           })
@@ -73,7 +71,7 @@
         // -- валидация фамилии (если поле указано в форме регистрации)
         if (!this.regForm.last_name) {
           this.$q.notify({
-            message: 'Необходимо заполнить поле "фамилия"',
+            message: this.$t('auth.invalid_last_name'),
             type: 'negative',
             position: 'top-right'
           })
@@ -87,7 +85,7 @@
           } else {
             if (res.message.includes('email already exist')) {
               this.$q.notify({
-                message: 'Пользователь с таким email уже зарегестрирован',
+                message: this.$t('auth.invalid_user_already_exist'),
                 type: 'negative',
                 position: 'top-right'
               })

@@ -1,0 +1,21 @@
+
+export default {
+ 		currency: 'currency',
+ 		price_group_id: 'price group ',
+ 		color_id: 'color ',
+ 		old_id: 'old ',
+ 		name: 'product',
+ 		slug: 'slug',
+ 		vendor_code: 'vendor code',
+ 		product_type_id: 'product type ',
+ 		discount_group_id: 'discount group ',
+ 		name_plural_deleted: 'deleted product',
+ 		images: 'images',
+ 		is_wholesale: 'is wholesale',
+ 		title: 'title',
+ 		description: 'description',
+ 		is_complex: 'is complex',
+ 		price: 'price',
+ 		name_plural: 'product',
+ 		published: 'published',
+}

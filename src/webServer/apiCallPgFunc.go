@@ -5,9 +5,9 @@ import (
 	"errors"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/pepelazz/projectBlueprintSite/src/pg"
-	"github.com/pepelazz/projectBlueprintSite/src/types"
-	"github.com/pepelazz/projectBlueprintSite/src/utils"
+	"github.com/pepelazz/rozetki/src/pg"
+	"github.com/pepelazz/rozetki/src/types"
+	"github.com/pepelazz/rozetki/src/utils"
 	"github.com/tidwall/gjson"
 	"net/http"
 	"strings"
@@ -34,31 +34,40 @@ type (
 var (
 	pgFuncCache = map[string]pgFuncCacheType{}
 	pgFuncList  = []PgMethod{
-		PgMethod{"user_update", []string{"admin",}, nil, nil},
+		PgMethod{"user_update", []string{"admin"}, nil, nil},
 		PgMethod{"user_list", []string{}, nil, nil},
 		PgMethod{"user_get_by_id", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"user_get_by_id_for_ui", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"current_user_update", []string{}, nil, BeforeHookAddUserId},
 		PgMethod{"current_user_get_auth_providers", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"message_list", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"message_update", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"message_mark_as_read", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"task_list", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"task_update", []string{"admin"}, nil, BeforeHookAddUserId},
-		PgMethod{"task_get_by_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"task_type_list", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"task_list_for_user", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"task_action_to_finished", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"task_type_update", []string{"admin"}, nil, BeforeHookAddUserId},
-		PgMethod{"task_type_get_by_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"chat_update", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"chat_get_by_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"chat_for_table_id", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"chat_message_update", []string{}, nil, BeforeHookAddUserId},
-		
-		PgMethod{"legal_entity_list", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"legal_entity_update", []string{}, nil, BeforeHookAddUserId},
-		PgMethod{"legal_entity_get_by_id", []string{}, nil, BeforeHookAddUserId},
+
+		PgMethod{"price_group_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"price_group_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"price_group_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"discount_group_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"discount_group_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"discount_group_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"product_type_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"product_type_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"product_type_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"color_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"color_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"color_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"brand_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"brand_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"brand_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"serie_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"serie_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"serie_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"product_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"product_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"product_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"product_serie_link_get_by_id", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"product_serie_link_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"product_serie_link_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"customer_list", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"customer_update", []string{}, nil, BeforeHookAddUserId},
+		PgMethod{"customer_get_by_id", []string{}, nil, BeforeHookAddUserId},
 	}
 )
 
@@ -149,7 +158,7 @@ func apiCallPgFunc(c *gin.Context) {
 		var err error
 		queryRes, err = callPgFuncToJson(jsonParam.Method, jsonParam.Params)
 		if err != nil {
-			utils.HttpError(c, http.StatusBadRequest, fmt.Sprintf("%s", err))
+			utils.HttpError(c, http.StatusBadRequest, processPgErrorMsg(err))
 			return
 		}
 		// в случае если указан ключ для кэширования, сохраняем полученные данные из базы в кэш
@@ -228,4 +237,9 @@ func BeforeHookAddUserId(c *gin.Context, p interface{}) error {
 		m["user_id"] = user.Id
 	}
 	return nil
+}
+
+func processPgErrorMsg(err error) string {
+
+	return err.Error()
 }

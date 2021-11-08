@@ -3,8 +3,8 @@ package pg
 import (
 	"database/sql"
 	"fmt"
-	"github.com/pepelazz/projectBlueprintSite/src/types"
 	"github.com/pepelazz/pg_generate"
+	"github.com/pepelazz/rozetki/src/types"
 )
 
 var Pg *sql.DB

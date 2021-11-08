@@ -1,8 +1,8 @@
 {
-  "name": "CompanyName",
+  "name": "Rozetki",
   "version": "0.0.1",
-  "description": "CompanyName",
-  "productName": "CompanyName",
+  "description": "Rozetki",
+  "productName": "Rozetki",
   "author": "pepelazz <pepelazz00@gmail.com>",
   "private": true,
   "scripts": {
@@ -18,8 +18,8 @@
     "axios": "^0.19.2",
     "moment": "^2.24.0",
     "moment-duration-format": "^2.3.2",
-    "vue-i18n": "^8.14.0",
-    "vuedraggable": "^2.23.2"
+    "vue-i18n": "^9.1.7",
+    "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",

@@ -7,8 +7,8 @@ DECLARE
 
        searchTxtVar TEXT := '';
 BEGIN
-        
 
+        
         
         -- заполняем options.title
         NEW.options = coalesce(OLD.options, '{}'::jsonb) || NEW.options || jsonb_build_object('title', jsonb_build_object('title', new.title));

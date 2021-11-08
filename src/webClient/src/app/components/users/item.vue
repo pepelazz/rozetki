@@ -8,35 +8,35 @@
       <!--  поля формы    -->
       <div class="row q-col-gutter-md q-mb-sm">
         <div class="col-md-4 col-xs-6">
-          <q-input outlined type='text' v-model="item.last_name" label="фамилия" class='q-mb-sm col-md-4 col-xs-6'/>
+          <q-input outlined type='text' v-model="item.last_name" :label="$t('user.last_name')" class='q-mb-sm col-md-4 col-xs-6'/>
         </div>
         <div class="col-md-4 col-xs-6">
-          <q-input outlined type='text' v-model="item.first_name" label="имя" class='q-mb-sm col-md-4 col-xs-6'/>
-        </div>
-      </div>
-      <div class="row q-col-gutter-md q-mb-sm">
-        <div class="col-md-4 col-xs-6">
-          <q-select outlined multiple v-model="item.role" label="роли" :options="options"/>
-        </div>
-        <div class="col-md-4 col-xs-6">
-          <q-select outlined v-model="item.state" label="статус" :options="stateOptions"/>
+          <q-input outlined type='text' v-model="item.first_name" :label="$t('user.first_name')" class='q-mb-sm col-md-4 col-xs-6'/>
         </div>
       </div>
       <div class="row q-col-gutter-md q-mb-sm">
         <div class="col-md-4 col-xs-6">
-          <q-input outlined type='text' v-model="item.grade" label="должность" class='q-mb-sm col-md-4 col-xs-6'/>
+          <q-select outlined multiple v-model="item.role" :label="$t('user.roles')" :options="options"/>
         </div>
         <div class="col-md-4 col-xs-6">
-          <q-input outlined mask="+# (###) ### - ####" v-model="item.phone" label="телефон" :readonly='false'  class='q-mb-sm col-md-4 col-xs-6' ><template v-slot:prepend><q-icon name="phone"/></template></q-input>
+          <q-select outlined v-model="item.state" :label="$t('user.state')"  :options="stateOptions"/>
+        </div>
+      </div>
+      <div class="row q-col-gutter-md q-mb-sm">
+        <div class="col-md-4 col-xs-6">
+          <q-input outlined type='text' v-model="item.grade" :label="$t('user.grade')" class='q-mb-sm col-md-4 col-xs-6'/>
+        </div>
+        <div class="col-md-4 col-xs-6">
+          <q-input outlined mask="+# (###) ### - ####" v-model="item.phone" :label="$t('user.phone')" :readonly='false'  class='q-mb-sm col-md-4 col-xs-6' ><template v-slot:prepend><q-icon name="phone"/></template></q-input>
         </div>
       </div>
       <!-- аватарка     -->
       <div class="row q-col-gutter-md">
         <div class="col-xs-12 col-sm-6 col-md-4">
-          <comp-fld-img label="фото" :fld="item.avatar" :ext="{fldName: 'avatar', uploadUrl: 'upload_profile_image', methodUpdate: 'user_update', tableId: item.id}"/>
+          <comp-fld-img :label="$t('user.photo')" :fld="item.avatar" :ext="{fldName: 'avatar', uploadUrl: 'upload_profile_image', methodUpdate: 'user_update', tableId: item.id}"/>
         </div>
         <div class="col-md-4 col-xs-6">
-          <q-input outlined  v-model="item.email" label="email" :readonly='true'  class='q-mb-sm col-md-4 col-xs-6' ><template v-slot:prepend><q-icon name="email"/></template></q-input>
+          <q-input outlined  v-model="item.email" :label="$t('user.email')" :readonly='true'  class='q-mb-sm col-md-4 col-xs-6' ><template v-slot:prepend><q-icon name="email"/></template></q-input>
         </div>
       </div>
 
@@ -51,11 +51,11 @@
   import _ from 'lodash'
   import roles from './roles'
 
-  const i18nState = {
-    waiting_auth: 'ожидает авторизации',
-    working: 'работает',
-    fired: 'уволен',
-  }
+  // const i18nState = {
+  //   waiting_auth: 'ожидает авторизации',
+  //   working: 'работает',
+  //   fired: 'уволен',
+  // }
   export default {
     props: ['id'],
     computed: {
@@ -63,7 +63,7 @@
       // локализация статусов
       stateOptions: function () {
         return ['waiting_auth', 'working', 'fired'].map(v => {
-          return {value: v, label: i18nState[v]}
+          return {value: v, label:  this.$t(`user.state_${v}`)}
         })
       }
     },
@@ -113,7 +113,7 @@
     methods: {
       resultModify(res) {
         res.role = res.role.map(roleName => _.find(this.options, {value: roleName})).filter(v => v)
-        if (res.state) res.state = {value: res.state, label: i18nState[res.state]}
+        if (res.state) res.state = {value: res.state, label: this.$t(`user.state_${res.state}`)}
         return res
       },
       save() {

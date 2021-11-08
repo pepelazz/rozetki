@@ -1,0 +1,48 @@
+docType = "Customer"
+tableComment = "покупатель"
+
+tableName ="customer"
+
+fields = [
+	{name="id",			type="serial"},
+	{name="title",					type="text", 	ext="not null",	 comment="название"},
+	{name="phone",					type="char",	size=30, 	ext="not null",	 comment="телефон"},
+	{name="email",					type="char",	size=100,	 comment="email"},
+	{name="password",					type="char",	size=50,	 comment="пароль"},
+	{name="brand_id",					type="int",	 comment="brand"},
+	{name="search_text",			type="text",	comment="колонка для поиска"},
+	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
+	{name="created_at",				type="timestamp",	ext="with time zone"},
+	{name="updated_at",				type="timestamp",	ext="with time zone"},
+	{name="deleted",				type="bool",	ext="not null default false"}
+]
+
+fkConstraints = [
+	{name="customer_title_already_exist", ext="UNIQUE (title)"},
+	{fld="brand_id", ref="brand", fk="id"}
+]
+
+triggers = [
+	{name="customer_created", when="before insert or update", ref="for each row", funcName="builtin_fld_update"},
+	{name="customer_trigger_before", when="before insert or update", ref="for each row", funcName="customer_trigger_before"},
+	{name="customer_trigger_after", when="after insert or update", ref="for each row", funcName="customer_trigger_after"}
+]
+
+
+
+methods = [
+	"customer_update",
+	"customer_get_by_id",
+	"customer_list",
+	"customer_trigger_before",
+	"customer_trigger_after"
+]
+
+alterScripts = [
+	"alter table customer add column if not exists title text;",
+	"alter table customer add column if not exists phone CHARACTER VARYING(30);",
+	"alter table customer add column if not exists email CHARACTER VARYING(100);",
+	"alter table customer add column if not exists password CHARACTER VARYING(50);",
+	"alter table customer add column if not exists brand_id int;",
+	"alter table customer add column if not exists search_text text;"
+]

@@ -1,0 +1,43 @@
+docType = "ProductSerieLink"
+tableComment = "product_serie_link"
+
+tableName ="product_serie_link"
+
+fields = [
+	{name="id",			type="serial"},
+	{name="product_id",					type="int",	 comment="product"},
+	{name="serie_id",					type="int",	 comment="serie"},
+	{name="search_text",			type="text",	comment="колонка для поиска"},
+	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
+	{name="created_at",				type="timestamp",	ext="with time zone"},
+	{name="updated_at",				type="timestamp",	ext="with time zone"},
+	{name="deleted",				type="bool",	ext="not null default false"}
+]
+
+fkConstraints = [
+	{fld="product_id", ref="product", fk="id"},
+	{fld="serie_id", ref="serie", fk="id"},
+	{name="product_serie_link_already_exist", ext="UNIQUE (product_id, serie_id)"},
+]
+
+triggers = [
+	{name="product_serie_link_created", when="before insert or update", ref="for each row", funcName="builtin_fld_update"},
+	{name="product_serie_link_trigger_before", when="before insert or update", ref="for each row", funcName="product_serie_link_trigger_before"},
+	{name="product_serie_link_trigger_after", when="after insert or update", ref="for each row", funcName="product_serie_link_trigger_after"}
+]
+
+
+
+methods = [
+	"product_serie_link_list",
+	"product_serie_link_update",
+	"product_serie_link_get_by_id",
+	"product_serie_link_trigger_before",
+	"product_serie_link_trigger_after"
+]
+
+alterScripts = [
+	"alter table product_serie_link add column if not exists product_id int;",
+	"alter table product_serie_link add column if not exists serie_id int;",
+	"alter table product_serie_link add column if not exists search_text text;"
+]

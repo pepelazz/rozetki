@@ -2,9 +2,9 @@
 
 <template>
   <q-page :padding="!isOpenInDialog">
-    <comp-breadcrumb v-if="!isOpenInDialog" :list="[{label:'ЮрЛица', docType:'legal_entity'}]"/>
+    <comp-breadcrumb class="text-capitalize" v-if="!isOpenInDialog" :list="[{label: $t('legal_entity.name_plural'), docType:'legal_entity'}]"/>
 
-    <comp-doc-list ref="docList" listTitle='ЮрЛица' listDeletedTitle='Удаленные юрЛица' pg-method="legal_entity_list"
+    <comp-doc-list ref="docList" :listTitle="$t('legal_entity.name_plural')" :listDeletedTitle="$t('legal_entity.name_plural_deleted')" pg-method="legal_entity_list"
                    :list-sort-data="listSortData" :list-filter-data="listFilterData"
                    :newDocUrl="currentUrl + 'new'"
                    :ext="ext" 
@@ -51,7 +51,7 @@
       return {
         listSortData: [
           {value: 'created_at', title: 'Дата'},
-          {value: 'title', title: 'Название'}
+          {value: 'title', title: 'Название'},
         ],
         listFilterData: [
           {value: {deleted: false}, title: 'Активные'},

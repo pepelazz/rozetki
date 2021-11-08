@@ -3,16 +3,13 @@ package main
 import (
 	"encoding/gob"
 	"flag"
-	"github.com/pepelazz/projectBlueprintSite/src/graylog"
-	"github.com/pepelazz/projectBlueprintSite/src/jobs"
-	"github.com/pepelazz/projectBlueprintSite/src/pg"
-	"github.com/pepelazz/projectBlueprintSite/src/types"
-	"github.com/pepelazz/projectBlueprintSite/src/utils"
-	"github.com/pepelazz/projectBlueprintSite/src/webServer"
-	"github.com/pepelazz/projectBlueprintSite/src/sse"
-	
-	
-	
+	"github.com/pepelazz/rozetki/src/jobs"
+	"github.com/pepelazz/rozetki/src/pg"
+	"github.com/pepelazz/rozetki/src/sse"
+	"github.com/pepelazz/rozetki/src/types"
+	"github.com/pepelazz/rozetki/src/utils"
+	"github.com/pepelazz/rozetki/src/webServer"
+
 	"math/rand"
 	"os"
 	"time"
@@ -30,7 +27,7 @@ func main() {
 	pgPort := flag.String("pg_port", "", "an string")
 	pgPassword := flag.String("pg_pass", "", "an string")
 	dbName := flag.String("dbname", "", "an string")
-	
+
 	flag.Parse()
 
 	if *isDev {
@@ -45,7 +42,7 @@ func main() {
 		if len(*dbName) > 0 {
 			_ = os.Setenv("PG_DBNAME", *dbName)
 		}
-		
+
 		_ = os.Setenv("IS_DEVELOPMENT", "true")
 	}
 
@@ -57,10 +54,6 @@ func main() {
 	err = pg.StartPostgres(config.Postgres)
 	utils.CheckErr(err, "StartPostgres")
 
-	// подключаемся к серверу сбора логов
-	err = graylog.Init(config.Graylog)
-	utils.CheckErr(err, "Connect to GraylogConfig")
-
 	// инициализируем генератор случайных чисел
 	rand.Seed(time.Now().UnixNano())
 	//
@@ -71,11 +64,8 @@ func main() {
 	// передаем часть конфига в utils
 	utils.SetWebServerConfig(config.WebServer)
 	utils.SetEmailConfig(config.Email)
-	
-	
 
 	//go pg.GenerateFakeUsers(100)
-	
 
 	// инициализируем брокера для обработки подключений по SSE
 	sse.Init()

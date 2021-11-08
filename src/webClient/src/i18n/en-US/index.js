@@ -1,0 +1,92 @@
+import price_group from './price_group'
+import discount_group from './discount_group'
+import product_type from './product_type'
+import color from './color'
+import brand from './brand'
+import serie from './serie'
+import product from './product'
+import product_serie_link from './product_serie_link'
+import customer from './customer'
+
+export default {
+	auth: {
+ 		invalid_password_must_be_more_7: 'password must be more than 7 characters',
+ 		invalid_first_name: 'you must fill in the "first name" field',
+ 		password_recovery_go_to_login: 'go to authorization',
+ 		register_message: 'Check the email specified in the registration. A letter should come to confirm the mailing address.',
+ 		invalid_password_wrong_repeat: 're-entered password does not match the first option',
+ 		invalid_user_already_exist: 'user with this email is already registered',
+ 		check_user_email_message: 'The link is no longer active. Possible reasons: <br/> <br/> - Your email has already been successfully confirmed - try to enter the system with your username and password <br/> - The email address has expired. Need to register again',
+ 		password_repeat: 'repeat password',
+ 		password_recovery_success_message: 'password changed successfully',
+ 		authorization: 'authorization',
+ 		password_recovery: 'password recovery',
+ 		invalid_email: '"email" field is filled incorrectly',
+ 		login: 'login',
+ 		password: 'password',
+ 		password_recovery_message: 'Check the email specified in the registration. A letter should come with a link for password recovery.',
+ 		register: 'register',
+ 		invalid_last_name: 'you must fill in the "last name" field',
+ 		user_not_found: 'user not found',
+ 		wrong_password: 'wrong password',
+ 		registration: 'registration',
+ 		forgot_password: 'forgot password',
+	},
+	profile: {
+ 		exit: 'exit',
+ 		breadcrumb_label: 'Profile edit',
+ 		last_name: 'last name',
+ 		first_name: 'first name',
+ 		phone: 'phone',
+ 		avatar: 'photo',
+	},
+	user: {
+ 		name_plural: 'users',
+ 		state: 'state',
+ 		phone: 'phone',
+ 		email: 'email',
+ 		role_admin: 'admin',
+ 		state_waiting_auth: 'waiting auth',
+ 		state_working: 'working',
+ 		state_fired: 'fired',
+ 		name_plural_deleted: 'deleted users',
+ 		last_name: 'last name',
+ 		first_name: 'first name',
+ 		roles: 'roles',
+ 		grade: 'grade',
+ 		photo: 'photo',
+ 		role_student: 'user',
+	},
+	menu: {
+ 		price_group: 'price group',
+ 		brand: 'brand',
+ 		product: 'product',
+ 		customer: 'customer',
+ 		user: 'users',
+ 		discount_group: 'discount group',
+ 		product_type: 'product type',
+ 		color: 'color',
+ 		serie: 'serie',
+ 		product_serie_link: 'product serie link',
+	},
+	message: {
+ 		edit: 'edit',
+ 		send: 'send',
+ 		file: 'file',
+ 		photo: 'photo',
+ 		save: 'save',
+ 		cancel: 'cancel',
+ 		delete: 'delete',
+ 		files: 'files',
+ 		ok: 'ok',
+	},
+	price_group,
+	discount_group,
+	product_type,
+	color,
+	brand,
+	serie,
+	product,
+	product_serie_link,
+	customer,
+}

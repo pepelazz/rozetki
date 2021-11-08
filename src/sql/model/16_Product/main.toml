@@ -1,0 +1,71 @@
+docType = "Product"
+tableComment = "product"
+
+tableName ="product"
+
+fields = [
+	{name="id",			type="serial"},
+	{name="title",					type="text", 	ext="not null",	 comment="название"},
+	{name="slug",					type="text",	 comment="slug"},
+	{name="description",					type="text",	 comment="description"},
+	{name="images",					type="jsonb",	 comment="images"},
+	{name="vendor_code",					type="text",	 comment="vendor code"},
+	{name="published",					type="bool", 	ext=" default false",	 comment="published"},
+	{name="is_wholesale",					type="bool", 	ext=" default false",	 comment="is wholesale"},
+	{name="is_complex",					type="bool", 	ext=" default false",	 comment="is complex"},
+	{name="price",					type="double",	 comment="price"},
+	{name="currency",					type="char",	size=20, 	ext=" default 'rub'",	 comment="currency"},
+	{name="product_type_id",					type="int",	 comment="product type"},
+	{name="price_group_id",					type="int",	 comment="price group"},
+	{name="discount_group_id",					type="int",	 comment="discount group"},
+	{name="color_id",					type="int",	 comment="color"},
+	{name="old_id",					type="char",	size=100,	 comment="old_id"},
+	{name="search_text",			type="text",	comment="колонка для поиска"},
+	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
+	{name="created_at",				type="timestamp",	ext="with time zone"},
+	{name="updated_at",				type="timestamp",	ext="with time zone"},
+	{name="deleted",				type="bool",	ext="not null default false"}
+]
+
+fkConstraints = [
+	{fld="product_type_id", ref="product_type", fk="id"},
+	{fld="price_group_id", ref="price_group", fk="id"},
+	{fld="discount_group_id", ref="discount_group", fk="id"},
+	{fld="color_id", ref="color", fk="id"},
+	{name="product_old_id_already_exist", ext="UNIQUE (old_id)"}
+]
+
+triggers = [
+	{name="product_created", when="before insert or update", ref="for each row", funcName="builtin_fld_update"},
+	{name="product_trigger_before", when="before insert or update", ref="for each row", funcName="product_trigger_before"},
+	{name="product_trigger_after", when="after insert or update", ref="for each row", funcName="product_trigger_after"}
+]
+
+
+
+methods = [
+	"product_list",
+	"product_update",
+	"product_get_by_id",
+	"product_trigger_before",
+	"product_trigger_after"
+]
+
+alterScripts = [
+	"alter table product add column if not exists title text;",
+	"alter table product add column if not exists slug text;",
+	"alter table product add column if not exists description text;",
+	"alter table product add column if not exists images jsonb;",
+	"alter table product add column if not exists vendor_code text;",
+	"alter table product add column if not exists published bool;",
+	"alter table product add column if not exists is_wholesale bool;",
+	"alter table product add column if not exists is_complex bool;",
+	"alter table product add column if not exists price double precision;",
+	"alter table product add column if not exists currency CHARACTER VARYING(20);",
+	"alter table product add column if not exists product_type_id int;",
+	"alter table product add column if not exists price_group_id int;",
+	"alter table product add column if not exists discount_group_id int;",
+	"alter table product add column if not exists color_id int;",
+	"alter table product add column if not exists old_id CHARACTER VARYING(100);",
+	"alter table product add column if not exists search_text text;"
+]

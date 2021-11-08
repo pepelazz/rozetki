@@ -2,17 +2,17 @@ package sse
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/pepelazz/projectBlueprintSite/src/utils"
+	"github.com/pepelazz/rozetki/src/utils"
 	"net/http"
 )
 
 var brokerByUser map[string]broker
 
-func AddConn(c *gin.Context)  {
+func AddConn(c *gin.Context) {
 
 	userId, ok := utils.ExtractUserIdString(c)
 	if !ok {
-		utils.HttpError(c, http.StatusBadRequest,"missed user_id")
+		utils.HttpError(c, http.StatusBadRequest, "missed user_id")
 		return
 	}
 
@@ -31,7 +31,7 @@ func AddConn(c *gin.Context)  {
 	}
 }
 
-func SendJson(userId string, d interface{})  {
+func SendJson(userId string, d interface{}) {
 	if b, ok := brokerByUser[userId]; ok {
 		go b.sendJSON(d)
 	}

@@ -4,32 +4,29 @@ services:
     build: .
     cpu_shares: 73
     networks:
-      - nla_db_net
+      - rozetki_net
     volumes:
       - /home/deploy/projectName/src/config.toml:/config.toml
       - /home/deploy/projectName/image:/image
+      - /home/deploy/projectName/uploaded_files:/uploaded_files
     ports:
       - "3101:3101"
-    logging:
-      driver: gelf
-      options:
-        gelf-address: "udp://85.143.214.161:12201"
-        tag: docker.app.nla_db
     depends_on:
       - postgres
 
   postgres:
-    image: postgres:12
+    image: postgres:13
     networks:
-      - nla_db_net
+      - rozetki_net
     volumes:
       - /home/deploy/projectName/postgres/volume:/var/lib/postgresql/data
       - /home/deploy/projectName/postgres/logs:/logs
     ports:
       - "5657:5432"
+    command: postgres -c shared_preload_libraries=pg_stat_statements -c pg_stat_statements.track=all -c max_connections=200
     environment:
       POSTGRES_PASSWORD: xvzDV4curLidx8IWZJ6czDHQ1qa7wjfL
 
 networks:
-  nla_db_net:
+  rozetki_net:
     driver: bridge

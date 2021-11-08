@@ -2,10 +2,10 @@ package webServer
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/pepelazz/projectBlueprintSite/src/sse"
-	"github.com/pepelazz/projectBlueprintSite/src/types"
-	"github.com/pepelazz/projectBlueprintSite/src/utils"
-	"github.com/pepelazz/projectBlueprintSite/src/webServer/auth"
+	"github.com/pepelazz/rozetki/src/sse"
+	"github.com/pepelazz/rozetki/src/types"
+	"github.com/pepelazz/rozetki/src/utils"
+	"github.com/pepelazz/rozetki/src/webServer/auth"
 	"html/template"
 	"strings"
 	"time"
@@ -82,16 +82,7 @@ func StartWebServer(config types.Config) {
 		apiRoute.POST("/upload_image", uploadImage)
 		apiRoute.POST("/upload_profile_image", uploadProfileImage)
 
-
-
-
-
 	}
-
-
-
-
-
 
 	// на ненайденный url отправляем статический файл для запуска vuejs приложения
 	r.NoRoute(func(c *gin.Context) {

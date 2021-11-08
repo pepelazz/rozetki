@@ -1,0 +1,42 @@
+docType = "Color"
+tableComment = "color"
+
+tableName ="color"
+
+fields = [
+	{name="id",			type="serial"},
+	{name="title",					type="char",	size=150, 	ext="not null",	 comment="название"},
+	{name="old_id",					type="char",	size=100,	 comment="old_id"},
+	{name="search_text",			type="text",	comment="колонка для поиска"},
+	{name="options",				type="jsonb",	comment="разные дополнительные параметры"},
+	{name="created_at",				type="timestamp",	ext="with time zone"},
+	{name="updated_at",				type="timestamp",	ext="with time zone"},
+	{name="deleted",				type="bool",	ext="not null default false"}
+]
+
+fkConstraints = [
+	{name="color_title_already_exist", ext="UNIQUE (title)"},
+	{name="color_old_id_already_exist", ext="UNIQUE (old_id)"}
+]
+
+triggers = [
+	{name="color_created", when="before insert or update", ref="for each row", funcName="builtin_fld_update"},
+	{name="color_trigger_before", when="before insert or update", ref="for each row", funcName="color_trigger_before"},
+	{name="color_trigger_after", when="after insert or update", ref="for each row", funcName="color_trigger_after"}
+]
+
+
+
+methods = [
+	"color_list",
+	"color_update",
+	"color_get_by_id",
+	"color_trigger_before",
+	"color_trigger_after"
+]
+
+alterScripts = [
+	"alter table color add column if not exists title CHARACTER VARYING(150);",
+	"alter table color add column if not exists old_id CHARACTER VARYING(100);",
+	"alter table color add column if not exists search_text text;"
+]

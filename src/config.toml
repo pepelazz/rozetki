@@ -2,7 +2,7 @@
 [postgres]
 user = "postgres"
 password = "xvzDV4curLidx8IWZJ6czDHQ1qa7wjfL"
-dbName = "nla_db"
+dbName = "rozetki"
 host = "postgres"
 port = 5432
 modelDir = ["./sql/model"]
@@ -14,16 +14,14 @@ enable = true
 port = 3101
 url = "https://example.ru"
 
-[graylog]
-host = "85.143.214.161"
-port = 12201
+
 
 [email]
-sender = "info@mail.ru"
-password = "password"
+sender = "e.letov@nl-a.ru"
+password = "DctBltnGjGkfye21"
 host = "smtp.mail.ru"
 port = 465
-senderName = "CompanyName"
+senderName = "Rozetki"
 isSendWithEmptySender = false
 
 

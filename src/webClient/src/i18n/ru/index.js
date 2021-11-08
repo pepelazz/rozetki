@@ -1,0 +1,92 @@
+import price_group from './price_group'
+import discount_group from './discount_group'
+import product_type from './product_type'
+import color from './color'
+import brand from './brand'
+import serie from './serie'
+import product from './product'
+import product_serie_link from './product_serie_link'
+import customer from './customer'
+
+export default {
+	user: {
+ 		name_plural: 'пользователи',
+ 		name_plural_deleted: 'удаленные пользователи',
+ 		last_name: 'фамилия',
+ 		roles: 'роли',
+ 		role_student: 'сотрудник',
+ 		role_admin: 'админ',
+ 		state_working: 'работает',
+ 		grade: 'должность',
+ 		photo: 'фото',
+ 		state_waiting_auth: 'ожидает авторизации',
+ 		state_fired: 'уволен',
+ 		first_name: 'имя',
+ 		state: 'статус',
+ 		phone: 'телефон',
+ 		email: 'email',
+	},
+	menu: {
+ 		serie: 'Series',
+ 		product: 'Products',
+ 		product_serie_link: 'Product_serie_links',
+ 		user: 'пользователи',
+ 		price_group: 'Price groups',
+ 		product_type: 'Product types',
+ 		color: 'Colors',
+ 		brand: 'Brands',
+ 		customer: 'Покупатели',
+ 		discount_group: 'Discount groups',
+	},
+	message: {
+ 		file: 'файл',
+ 		save: 'сохранить',
+ 		edit: 'редактировать',
+ 		delete: 'удалить',
+ 		send: 'отправить',
+ 		files: 'файлы',
+ 		photo: 'фото',
+ 		ok: 'ok',
+ 		cancel: 'отмена',
+	},
+	auth: {
+ 		authorization: 'авторизация',
+ 		password_recovery: 'восстановление пароля',
+ 		register_message: 'Проверьте указанный в регистрации email. Должно прийти письмо для подтверждения почтового адреса.',
+ 		invalid_last_name: 'необходимо заполнить поле "фамилия"',
+ 		wrong_password: 'неверный пароль',
+ 		login: 'войти',
+ 		password_repeat: 'повторите пароль',
+ 		register: 'зарегистрироваться',
+ 		invalid_password_wrong_repeat: 'повторно введенный пароль не совпадает с первым вариантом',
+ 		invalid_user_already_exist: 'пользователь с таким email уже зарегестрирован',
+ 		check_user_email_message: 'Ссылка уже неактивна. Возможные причины: <br/><br/>- Ваш email уже успешно подтвержден - попробуйте войти в систему с логином и паролем <br/>- Истекло время подтверждения почтового адреса. Нужно регистрироваться снова',
+ 		password: 'пароль',
+ 		password_recovery_message: 'Проверьте указанный в регистрации email. Должно прийти письмо с ссылкой для восстановления пароля.',
+ 		user_not_found: 'пользователь с таким email не найден',
+ 		registration: 'регистрация',
+ 		password_recovery_go_to_login: 'перейти к авторизации',
+ 		forgot_password: 'забыли пароль',
+ 		invalid_email: 'поле "email" заполнено неверно',
+ 		invalid_password_must_be_more_7: 'пароль должен быть больше 7 знаков',
+ 		invalid_first_name: 'необходимо заполнить поле "имя"',
+ 		password_recovery_success_message: 'пароль успешно изменен',
+	},
+	profile: {
+ 		breadcrumb_label: 'Редактирование профиля',
+ 		last_name: 'фамилия',
+ 		first_name: 'имя',
+ 		phone: 'телефон',
+ 		avatar: 'фото',
+ 		exit: 'выйти',
+	},
+	price_group,
+	discount_group,
+	product_type,
+	color,
+	brand,
+	serie,
+	product,
+	product_serie_link,
+	customer,
+}

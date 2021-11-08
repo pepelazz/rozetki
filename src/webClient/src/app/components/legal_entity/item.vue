@@ -8,22 +8,22 @@
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <q-input outlined type='text' v-model="item.title" label="название" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <q-input outlined type='text' v-model="item.title" :label="$t('legal_entity.title')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <q-input outlined type='text' v-model="item.inn" label="ИНН"  :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <q-input outlined type='text' v-model="item.inn" :label="$t('legal_entity.inn')"  :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       <div class="col-md-4 col-sm-6 col-xs-12">
-          <q-input outlined type='text' v-model="item.type" label="тип организации" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
+          <q-input outlined type='text' v-model="item.type" :label="$t('legal_entity.type')" autogrow :readonly='false'  class='q-mb-sm col-md-4 col-sm-6 col-xs-12' />
       </div>
       </div>
       
       <div class="row q-col-gutter-md q-mb-sm">
       <div class="col-md-8 col-sm-12 col-xs-12">
-          <q-input outlined type='text' v-model="item.address_legal" label="юр адрес" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
+          <q-input outlined type='text' v-model="item.address_legal" :label="$t('legal_entity.address_legal')" autogrow :readonly='false'  class='q-mb-sm col-md-8 col-sm-12 col-xs-12' />
       </div>
       </div>
       
@@ -31,7 +31,7 @@
       <!--  кнопки   -->
       <comp-item-btn-save v-if="!isOpenInDialog" @save="save" :readonly="false" @cancel="$router.push(docUrl)"/>
       <!--  при открытии в диалоге кнопку Отмена не показываем   -->
-      <q-btn v-else color="secondary" label="сохранить" class="q-mr-sm" @click="save"/>
+      <q-btn v-else color="secondary" :label="$t('message.save')" class="q-mr-sm" @click="save"/>
 
         
 
@@ -64,6 +64,9 @@
                 optionsFlds: [],
                 
             }
+        },
+        watch: {
+          
         },
         methods: {
           

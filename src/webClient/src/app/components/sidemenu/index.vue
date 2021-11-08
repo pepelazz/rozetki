@@ -13,7 +13,7 @@
                   </q-avatar>
                 </q-item-section>
                 <q-item-section>
-                  <q-item-label>{{ link.text }}</q-item-label>
+                  <q-item-label>{{link.text.includes("i18n_") ? $t(link.text.replace("i18n_", "")) : link.text}}</q-item-label>
                 </q-item-section>
               </q-item>
               <q-expansion-item v-else header-class="text-grey" closed>
@@ -24,14 +24,14 @@
                     </q-avatar>
                   </q-item-section>
                     <q-item-section>
-                      {{link.text}}
+                      {{link.text.includes("i18n_") ? $t(link.text.replace("i18n_", "")) : link.text}}
                     </q-item-section>
                 </template>
                 <span v-for="link1 in link.linkList" :key="link1.text" >
                   <q-item v-if="isRole(link1.roles)" :inset-level="1" v-ripple clickable :to="link1.url"
                           exact>
                   <q-item-section>
-                    <q-item-label>{{ link1.text }}</q-item-label>
+                    <q-item-label>{{link1.text.includes("i18n_") ? $t(link1.text.replace("i18n_", "")) : link1.text}}</q-item-label>
                   </q-item-section>
                 </q-item>
                 </span>
@@ -63,11 +63,19 @@
             return {
                 menuLinks: [
                     // for codeGenerate ##sidemenu_slot1
-									{icon: 'https://image.flaticon.com/icons/svg/423/423063.svg', text: 'Пользователи', url: '/users', roles: ['admin']},
 
-									{icon: 'image/legal_entity_icon.svg', text: 'ЮрЛица', url: '/legal_entity', roles: []},
-{isFolder: true, icon: 'https://image.flaticon.com/icons/svg/1643/1643260.svg', text: 'Справочники', roles: [], linkList: 								[
-								{icon: 'image/legal_entity_icon.svg', text: 'ЮрЛица', url: '/legal_entity', roles: []},
+									{icon: 'image/users.svg', text: 'Пользователи', url: '/users', roles: ['admin']},
+
+									{icon: 'image/product.png', text: 'i18n_menu.product', url: '/product', roles: []},
+
+									{icon: 'image/customer.png', text: 'i18n_menu.customer', url: '/customer', roles: []},
+{isFolder: true, icon: 'image/directory.png', text: 'Справочники', roles: [], linkList: 								[
+								{icon: 'image/price_group.png', text: 'i18n_menu.price_group', url: '/price_group', roles: []},
+								{icon: 'image/discount_group.png', text: 'i18n_menu.discount_group', url: '/discount_group', roles: []},
+								{icon: 'image/product_type.png', text: 'i18n_menu.product_type', url: '/product_type', roles: []},
+								{icon: 'image/color.png', text: 'i18n_menu.color', url: '/color', roles: []},
+								{icon: 'image/brand.png', text: 'i18n_menu.brand', url: '/brand', roles: []},
+								{icon: 'image/serie.png', text: 'i18n_menu.serie', url: '/serie', roles: []},
 ],},
 
                 ],
